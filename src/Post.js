@@ -1,14 +1,14 @@
 import { Avatar } from "@mui/material";
-import React from "react";
+import { React, forwardRef } from "react";
 import InputOption from "./InputOption";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ShareIcon from "@mui/icons-material/Share";
 import SendIcon from "@mui/icons-material/Send";
 
-function Post({ name, description, message, photoUrl }) {
+const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
   return (
-    <div className="p-4 bg-white mb-2 rounded-lg">
+    <div ref={ref} className="p-4 bg-white mb-2 rounded-lg">
       <div className="flex mb-3">
         <Avatar src={photoUrl}>{name?.[0]}</Avatar>
         <div className="ml-3">
@@ -34,6 +34,6 @@ function Post({ name, description, message, photoUrl }) {
       </div>
     </div>
   );
-}
+});
 
 export default Post;

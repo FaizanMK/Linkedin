@@ -1,7 +1,11 @@
 import { Avatar } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 
 function Sidebar() {
+  const user = useSelector(selectUser);
+
   const recentItem = (topic) => (
     <div className="flex text-xs text-gray-400 font-bold cursor-pointer mb-1 p-1 hover:bg-gray-200 hover:rounded-xl hover:cursor-pointer hover:text-black ">
       <span className="mr-2 ml-1">#</span>
@@ -17,9 +21,12 @@ function Sidebar() {
           alt=""
           className="-mb-1 w-full h-14 rounded-t-xl rounded-r-xl object-cover"
         />
-        <Avatar class="h-10" />
-        <h2 className="text-lg">Faizan</h2>
-        <h4 className="text-xs text-gray-400">Faizan's bio</h4>
+        <Avatar src={user.photoUrl} class="h-10">
+          {user.email[0]}
+        </Avatar>
+        <h2 className="text-lg">{user.displayName}</h2>
+        <h4 className="text-xs text-gray-400">{user.email}</h4>
+        {console.log("this is user object", user)}
       </div>
       <div className="p-2 mb-2 border border-solid border-gray-400 bg-white rounded-b-lg	">
         {/* sidebar stats */}

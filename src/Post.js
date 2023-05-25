@@ -10,7 +10,7 @@ function Post({ name, description, message, photoUrl }) {
   return (
     <div className="p-4 bg-white mb-2 rounded-lg">
       <div className="flex mb-3">
-        <Avatar />
+        <Avatar src={photoUrl}>{name?.[0]}</Avatar>
         <div className="ml-3">
           {/* post info */}
           <h2 className="text-base">{name}</h2>

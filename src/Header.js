@@ -6,8 +6,20 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { useDispatch } from "react-redux";
+import { logout } from "./features/userSlice";
+import { signOut } from "firebase/auth";
+import { auth } from "./firebase";
 
 function Header() {
+  const dispatch = useDispatch();
+
+  const logoutOfApp = () => {
+    dispatch(logout());
+
+    signOut(auth);
+  };
+
   return (
     <div className="flex justify-evenly lg:justify-start border-b border-gray-300 py-2 bg-white w-full sticky top-0 z-nn ">
       <div className="flex">
@@ -23,6 +35,7 @@ function Header() {
           {/* search bar */}
           <SearchIcon />
           <input
+            placeholder="Search"
             type="text"
             className="border-none outline-none bg-transparent focus:w-full  "
           />
@@ -36,10 +49,7 @@ function Header() {
         <HeaderOption title="Jobs" Icon={BusinessCenterIcon} />
         <HeaderOption title="Messaging" Icon={ChatIcon} />
         <HeaderOption title="Notifications" Icon={NotificationsIcon} />
-        <HeaderOption
-          title="Babar"
-          avatar="https://img1.hscicdn.com/image/upload/f_auto,t_ds_square_w_320,q_50/lsci/db/PICTURES/CMS/320400/320448.png"
-        />
+        <HeaderOption title="Babar" avatar={true} onClick={logoutOfApp} />
       </div>
     </div>
   );

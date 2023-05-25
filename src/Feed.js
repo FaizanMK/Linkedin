@@ -15,8 +15,12 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import db from "./firebase";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 
 function Feed() {
+  const user = useSelector(selectUser);
+
   const [posts, setPosts] = useState([]);
   const [input, setInput] = useState("");
   // reference to db
@@ -44,12 +48,15 @@ function Feed() {
 
     e.preventDefault();
     await addDoc(collection(db, "posts"), {
-      name: "faizan khan",
-      description: "this is a test",
+      name: user?.displayName || null,
+      description: user?.email || null,
       message: input,
-      photoUrl: "",
+      photoUrl: user?.photoUrl || "",
       timestamp: serverTimestamp(),
     });
+    console.log("am i working");
+    console.log(user);
+
     setInput("");
   };
   return (
